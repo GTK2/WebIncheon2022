@@ -1,0 +1,12 @@
+@charset "utf-8";
+
+/* reset */
+* {margin: 0 auto; padding: 0}
+
+/* game-area */
+#game-area {width: 600px; height: 600px; background-color: #ccc;}
+#game-area div {float: left; width: 150px; height: 150px; text-align: center; line-height: 150px;}
+#game-info {width: 600px;}
+#game-info div {float: left; width: 150px; height: 100px; text-align: center; line-height: 100px;}
+#start-btn:hover {background-color: #f77ab8; cursor: pointer;}
+#hint-btn:hover {background-color: #f77ab8; cursor: pointer;}
