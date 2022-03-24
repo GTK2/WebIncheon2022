@@ -1,10 +1,19 @@
+* {
+    margin: 0 auto;
+    padding: 0;
+}
+
+#wrapper {
+    width:  600px;
+    height: 600px;
+}
+
 .card {
     display: inline-block;
-    width: 70px;
-    height: 100px;
-    margin-right: 40px;
-    margin-bottom: 20px;
-    margin-top: 20px;
+    width: 24%;
+    height: 24%;
+    margin-right: 1%;
+    margin-top: 1%;
     perspective: 140px;
   }
   
@@ -30,6 +39,29 @@
     backface-visibility: hidden;
     border: 1px solid #828282;
   }
+  .card-img img{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 80%;
+    z-index: 1;
+  }
+  .card-city {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 70%;
+    height: 20%;
+    transform: translate(-50%, -50%);
+    font-size: 0.9em;
+    font-weight: bold;
+    color: #ddd;
+    text-align: center;
+    z-index: 2;
+    background-color: rgba(0,0,0,0.8);
+  }
   
   .card-front {
     background: navy;
@@ -37,4 +69,23 @@
   
   .card-back {
     transform: rotateY(180deg);
+  }
+
+  #game-info {
+    width: 600px;
+  }
+  #game-info div {
+    float: left;
+    width: 150px;
+    height: 100px;
+    text-align: center;
+    line-height: 100px;
+  }
+  #start-btn:hover {
+    background-color: #f77ab8;
+    cursor: pointer;
+  }
+  #hint-btn:hover {
+    background-color: #f77ab8;
+    cursor: pointer;
   }
