@@ -4,24 +4,23 @@
 }
 
 #wrapper {
-    width:  600px;
+    width:  60%;
     height: 600px;
 }
 
 .card {
     display: inline-block;
     width: 24%;
-    height: 24%;
-    margin-right: 1%;
-    margin-top: 1%;
+    height: 23.5%;
+    margin: 0.5%;
     perspective: 140px;
   }
   
   .card-inner {
     /* position: absolute를 이용하여 카드 앞뒤를 곂쳐지게 함*/
     position: relative;
-    width: 100%;
-    height: 100%;
+    width: 99%;
+    height: 99%;
     text-align: center;
     transition: transform 0.8s;
     transform-style: preserve-3d;
@@ -34,8 +33,8 @@
   .card-front,
   .card-back {
     position: absolute;
-    width: 100%;
-    height: 100%;
+    width: 99%;
+    height: 99%;
     backface-visibility: hidden;
     border: 1px solid #828282;
   }
@@ -72,20 +71,22 @@
   }
 
   #game-info {
-    width: 600px;
+    width: 60%;
+    color: #fff;
   }
   #game-info div {
     float: left;
-    width: 150px;
-    height: 100px;
+    width: 25%;
+    height: 80px;    
     text-align: center;
-    line-height: 100px;
+    line-height: 80px;
+    background-color: rgb(12, 61, 100);
   }
   #start-btn:hover {
-    background-color: #f77ab8;
+    background-color: #012949;
     cursor: pointer;
   }
   #hint-btn:hover {
-    background-color: #f77ab8;
+    background-color: #012949;
     cursor: pointer;
   }
