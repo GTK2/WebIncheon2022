@@ -18,7 +18,6 @@ let chosenCity2 = [];
 
 let timer = 5; //남은 시간
 let card_found = 0; //찾은 카드 수
-let isPlaying = false; //게임 중인지 확인
 
 //남은 시간, 찾은 카드 수 표시
 let time = document.getElementById('remain-time');
@@ -44,7 +43,8 @@ function shuffle() {
 }
 
 function playCard() {
-  isPlaying = true;
+  reset();
+  //clearInterval(interval);
   shuffle();
 
   clickFlag = false;
@@ -141,15 +141,9 @@ function reset(){
   cities = cityName.slice();
   timer = 5;
   card_found = 0;
-  playCard();
 }
 
 document.getElementById('start-btn').onclick = function(){
-  if(!isPlaying){
-    this.innerHTML = '다시하기';
-    playCard();
-  }
-  else{
-    reset();
-  }
+  this.innerHTML = '다시하기';
+  playCard();
 };
