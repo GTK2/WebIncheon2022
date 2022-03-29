@@ -65,6 +65,7 @@ document.getElementById('start-btn').onclick = function(){
     this.innerHTML = '다시하기';
 
     shuffle();
+
     clickFlag = false;
     //카드 세팅
     for (let i = 0; i < x * y; i++) {
@@ -94,6 +95,9 @@ document.getElementById('start-btn').onclick = function(){
         if (clickFlag && !completedOne.includes(card)) { //clickFlag가 true, 매치 안된 카드일 경우,
           card.classList.toggle('flipped');
           clickedOne.push(card); //선택한 카드 배열에 추가
+          let check3seconds = setTimeout(function(){
+
+          }, 3000);
           if (clickedOne.length == 2) { //선택한 카드가 2개일때
             //카드가 같으면 계속 오픈 시킴
             if (clickedOne[0].querySelector('.card-city').innerText ===
