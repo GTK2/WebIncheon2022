@@ -5,15 +5,14 @@
 
 #wrapper {
     width:  60%;
-    height: 600px;
+    height: 80vh;
 }
 
 .card {
     display: inline-block;
     width: 24%;
-    height: 23.5%;
+    height: 24%;
     margin: 0.5%;
-    perspective: 140px;
   }
   
   .card-inner {
@@ -74,6 +73,8 @@
 
   #game-info {
     width: 60%;
+    height: 10vh;
+    margin-top: 5vh;
     color: #fff;
   }
   #game-info div {
