@@ -28,6 +28,10 @@
   .card.flipped .card-inner {
     transform: rotateY(180deg);
   }
+
+  .card.found {
+    background-color: rgba(255,0,0,0.5);
+  }
   
   .card-front,
   .card-back {

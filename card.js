@@ -18,6 +18,8 @@ let chosenCity2 = [];
 
 let timer = 5; //남은 시간
 let card_found = 0; //찾은 카드 수
+let interval = 0; //타이머
+let isPlaying = false; //게임중 표시 플래그
 
 //남은 시간, 찾은 카드 수 표시
 let time = document.getElementById('remain-time');
@@ -25,6 +27,7 @@ time.innerHTML = '남은시간 : ' + timer;
 let card = document.getElementById('card-found');
 card.innerHTML = '찾은 카드수 : ' + card_found;
 
+//카드 섞기
 function shuffle() {
   while (cities.length > 10) {
     let random = Math.floor(Math.random() * cities.length);
@@ -42,12 +45,12 @@ function shuffle() {
   console.log(chosenCity2);
 }
 
+//게임 시작
 function playCard() {
   reset();
-  //clearInterval(interval);
   shuffle();
-
   clickFlag = false;
+
   //카드 세팅
   for (let i = 0; i < x * y; i++) {
     const card = document.createElement('div');
@@ -75,14 +78,7 @@ function playCard() {
     card.addEventListener('click', function() {
       if (clickFlag && !completedOne.includes(card) && !clickedOne.includes(card)) { //clickFlag가 true, 매치 안된 카드일 경우,
         card.classList.toggle('flipped');
-        clickedOne.push(card); //선택한 카드 배열에 추가
-        // if (clickedOne.length == 1){
-        //   setTimeout(() => {
-        //     clickedOne[0].classList.remove('flipped');
-        //     clickFlag = true;
-        //     clickedOne = [];
-        //   },3000);
-        // }
+        clickedOne.push(card);
         if (clickedOne.length == 2) { //선택한 카드가 2개일때
           //카드가 같으면 계속 오픈 시킴
           if (clickedOne[0].querySelector('.card-city').innerText ===
@@ -91,14 +87,16 @@ function playCard() {
             completedOne.push(clickedOne[0]); //매치된 카드를 완성카드로 넣기
             completedOne.push(clickedOne[1]);
             card_found++;
+            clickedOne[0].classList.add('found'); //찾은 카드 표식 남기기
+            clickedOne[1].classList.add('found');
             let text = document.getElementById('card-found');
             text.innerHTML = '찾은 카드수 : ' + card_found;
             clickedOne = [] //초기화
             if (completedOne.length === x * y) { //모두 매치했을 경우 성공 메시지
-              alert('축하합니다. 성공하셨습니다');
+              alert('축하합니다. 성공하셨습니다'); // 참여정보 등록 폼으로 대체
               isPlaying = false;
-              // clearInterval(interval);
-              reset();
+              clickFlag = false;
+              clearInterval(interval);
             }
           } else { //카드가 다르면 1초 후 카드 닫기
             clickFlag = false; //미리 클릭 방지
@@ -114,25 +112,44 @@ function playCard() {
     });
   }
 
+  //게임 시작 시 전체 카드 오픈
   let cardLegnth = document.querySelectorAll('.card');
   cardLegnth.forEach(function(ele, index){
     ele.classList.add('flipped');
   });
-  //5초뒤에 닫기
-  let interval = setInterval(function(){
+
+  interval = setInterval(function(){
+    //타이머 실행
     if(timer > 0){
+      if(timer >= 60){
+        let mm = 1;
+        let ss = timer - 60;
+        let time = document.getElementById('remain-time');
+        time.innerHTML = '남은시간 : ' + mm + ' : ' + ss;
+      }else{
+        let time = document.getElementById('remain-time');
+        time.innerHTML = '남은시간 : ' + timer;
+      }
       timer -= 1;
       console.log(timer);
-      let time = document.getElementById('remain-time');
-      time.innerHTML = '남은시간 : ' + timer;
-    }else{
+    }
+    //첫시작 시 5초뒤에 닫기  
+    else if(!isPlaying){
       document.querySelectorAll('.card').forEach((ele) => ele.classList.remove('flipped'));
       clickFlag = true;
+      isPlaying = true;
       timer = 90;
+    }
+    //게임시간 오버 시 전체 카드 오픈
+    else{
+      document.querySelectorAll('.card').forEach((ele) => ele.classList.add('flipped'));
+      clickFlag = false;
+      clearInterval(interval);
     }
   }, 1000);
 }
 
+//게임 초기화
 function reset(){
   document.querySelector('#wrapper').innerHTML = ''; //전체 초기화
   completedOne = [];
@@ -141,6 +158,8 @@ function reset(){
   cities = cityName.slice();
   timer = 5;
   card_found = 0;
+  card.innerHTML = '찾은 카드수 : ' + card_found;
+  clearInterval(interval);
 }
 
 document.getElementById('start-btn').onclick = function(){
